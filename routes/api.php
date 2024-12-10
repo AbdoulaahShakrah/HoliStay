@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AmenityController;
 use App\Http\Controllers\Api\V1\PropertyController;
+use App\Http\Controllers\Api\V1\TaxController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,6 @@ Route::get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () {
     Route::apiResource('properties', PropertyController::class);
     Route::apiResource('amenities', AmenityController::class);
+    Route::apiResource('taxes', TaxController::class);
 });
 
