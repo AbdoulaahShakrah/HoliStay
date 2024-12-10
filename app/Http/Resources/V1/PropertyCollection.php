@@ -25,7 +25,7 @@ class PropertyCollection extends ResourceCollection
                 'property_status' => $property->property_status,
                 'property_capacity' => $property->property_capacity,
                 'photos' => new PhotoCollection($property->whenLoaded('photos')),
-                'amenities' => new AmenitiesCollection($property->whenLoaded('property_amenities')),
+                'amenities' => new PropertyAmenitiesCollection($property->whenLoaded('property_amenities')),
                 'taxes' => new TaxesCollection($property->whenLoaded('property_taxes')),
             ];
         })->toArray();

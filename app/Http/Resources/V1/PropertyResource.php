@@ -31,7 +31,7 @@ class PropertyResource extends JsonResource
             'property_description' => $this->property_description,
             'page_visits' => $this->page_visits,
             'photos' => new PhotoCollection($this->whenLoaded('photos')),
-            'amenities' => new AmenitiesCollection($this->whenLoaded('property_amenities')),
+            'amenities' => new PropertyAmenitiesCollection($this->whenLoaded('property_amenities')),
             'taxes' => new TaxesCollection($this->whenLoaded('property_taxes')),
         ];
     }

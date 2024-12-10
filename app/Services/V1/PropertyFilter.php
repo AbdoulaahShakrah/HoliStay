@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class PropertyFilter extends ApiFilter{
     protected $safeParms = [
+        'hostId' => ['eq'],
         'propertyType' => ['eq'],
         'propertyCountry' => ['contain'],
         'propertyCity' => ['contain'],
@@ -24,7 +25,7 @@ class PropertyFilter extends ApiFilter{
     ];
 
     protected $columnMap = [
-        
+        'hostId' => 'host_id',
         'propertyType' => 'property_type',
         'propertyCountry' => 'property_country',
         'propertyCity' => 'property_city',

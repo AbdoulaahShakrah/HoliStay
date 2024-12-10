@@ -5,7 +5,7 @@ namespace App\Http\Resources\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class AmenitiesCollection extends ResourceCollection
+class PropertyAmenitiesCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
