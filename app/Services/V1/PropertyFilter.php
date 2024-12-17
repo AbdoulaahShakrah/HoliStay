@@ -2,7 +2,6 @@
 namespace App\Services\V1;
 
 use App\Services\ApiFilter;
-use Illuminate\Http\Request;
 
 class PropertyFilter extends ApiFilter{
     protected $safeParms = [
@@ -12,7 +11,9 @@ class PropertyFilter extends ApiFilter{
         'propertyCity' => ['contain'],
         'propertyPrice' => ['gt', 'lt'],
         'propertyCapacity' => ['gt', 'lt'],
-        'propertyStatus' => ['eq']
+        'propertyStatus' => ['eq'],
+        'checkInDate' => ['eq'],
+        'checkOutDate' => ['eq'],
     ];
 
     protected $operatorMap = [
@@ -32,5 +33,7 @@ class PropertyFilter extends ApiFilter{
         'propertyPrice' => 'property_price',
         'propertyCapacity' => 'property_capacity',
         'propertyStatus' => 'property_status',
+        'checkInDate' => 'check_in_date',
+        'checkOutDate' => 'check_out_date',
     ];
 }

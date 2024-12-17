@@ -13,6 +13,7 @@ class Photo extends Model
     protected $table = "photos";
     protected $primaryKey = "photo_id";
     public $timestamps = false;
+    protected $fillable = ["property_id", "photo_url"];
 
     public function property(): BelongsTo{
         return $this->belongsTo(Property::class, 'property_id', 'property_id');

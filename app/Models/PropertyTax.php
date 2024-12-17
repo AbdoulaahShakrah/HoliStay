@@ -13,7 +13,7 @@ class PropertyTax extends Model
     protected $table = "property_taxes";
     protected $primaryKey = "property_tax_id";
     public $timestamps = false;
-
+    protected $fillable = ["tax_id", "property_id"];
     
     public function property(): BelongsTo{
         return $this->belongsTo(Property::class, 'property_id', 'property_id');

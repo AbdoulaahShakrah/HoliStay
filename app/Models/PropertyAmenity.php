@@ -13,6 +13,7 @@ class PropertyAmenity extends Model
     protected $table = "property_amenities";
     protected $primaryKey = "property_amenity_id";
     public $timestamps = false;
+    public $fillable = ['property_id', 'amenity_id'];
 
     public function property(): BelongsTo{
         return $this->belongsTo(Property::class, 'property_id', 'property_id');

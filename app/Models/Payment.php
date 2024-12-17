@@ -13,6 +13,7 @@ class Payment extends Model
     protected $table = "payments";
     protected $primaryKey = "payment_id";
 
+    protected $fillable = ["reservation_id", "payment_method"];
     public function reservation(): BelongsTo{
         return $this->belongsTo(Reservation::class, 'reservation_id', 'reservation_id');
     }
