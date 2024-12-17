@@ -12,6 +12,7 @@ class Reservation extends Model
     use HasFactory;
     protected $table = "reservations";
     protected $primaryKey = "reservation_id";
+    protected $fillable = ["property_id", "client_id", "check_in_date", "check_out_date", "reservation_status", "reservation_amount"];
 
     public function client(): BelongsTo{
         return $this->belongsTo(Client::class, 'client_id', 'client_id');

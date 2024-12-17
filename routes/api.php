@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\PhotoController;
 use App\Http\Controllers\Api\V1\PropertyAmenityController;
 use App\Http\Controllers\Api\V1\PropertyController;
 use App\Http\Controllers\Api\V1\PropertyTaxController;
+use App\Http\Controllers\Api\V1\ReservationController;
 use App\Http\Controllers\Api\V1\TaxController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
     Route::apiResource('propertyTaxes', PropertyTaxController::class);
     Route::apiResource('photos', PhotoController::class);
     Route::apiResource('payment', PaymentController::class);
-
+    Route::apiResource('reservation', ReservationController::class);
 });
 
