@@ -28,9 +28,9 @@ return new class extends Migration
             $table->string('property_status');
             $table->integer('property_capacity');
             $table->text('property_description'); // com vista a paria etc...
-            $table->integer('page_visits');
+            $table->integer('page_visits')->default(0);
+            $table->softDeletes();
             $table->timestamps();
-
        });
     }
 

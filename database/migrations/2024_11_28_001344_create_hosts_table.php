@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hosts', function (Blueprint $table) {
             $table->id('host_id');
-            $table->integer('user_id')->unsigned(); 
+            $table->unsignedBigInteger('user_id'); 
             $table->text('host_description');
             $table->string('job');
             $table->string('iban', 34)->nullable();

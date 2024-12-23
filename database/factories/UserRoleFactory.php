@@ -2,15 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Client;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Client>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserRole>
  */
-class ClientFactory extends Factory
+class UserRoleFactory extends Factory
 {
+    protected $model = UserRole::class;
+
     /**
      * Define the model's default state.
      *
@@ -20,9 +22,7 @@ class ClientFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'client_name' => $this->faker->name(),
-            'phone_number' => $this->faker->phoneNumber(),
-            'languages' => $this->faker->randomElement(['English', 'Spanish', 'French']),
+            'role' => $this->faker->randomElement(['client', 'host'])
         ];
     }
 }

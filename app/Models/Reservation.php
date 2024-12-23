@@ -21,4 +21,8 @@ class Reservation extends Model
     public function payment(): HasOne{
         return $this->hasOne(Payment::class, 'reservation_id', 'reservation_id');
     }
+
+    public function property(): BelongsTo{
+        return $this->belongsTo(Property::class, 'property_id', 'property_id')->withTrashed();
+    }
 }

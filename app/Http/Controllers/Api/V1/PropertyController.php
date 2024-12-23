@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\v1\DeletePropertyRequest;
 use App\Http\Requests\V1\StorePropertyRequest;
+use App\Http\Requests\v1\UpdatePropertyRequest;
 use App\Http\Resources\V1\PropertyCollection;
 use App\Http\Resources\V1\PropertyResource;
 use App\Models\Property;
@@ -65,13 +67,13 @@ class PropertyController extends Controller
                 $reservedPropertyIds = $reservations->pluck('property_id')->toArray();
 
                 $propertiesQuery = Property::whereNotIn('property_id', $reservedPropertyIds);
-                
+
                 $filteredQueryItems = array_slice($queryItems, 0, -2);
 
                 $properties = $propertiesQuery
-                ->where($filteredQueryItems)
-                ->with('photos', 'property_taxes', 'property_amenities')
-                ->get();
+                    ->where($filteredQueryItems)
+                    ->with('photos', 'property_taxes', 'property_amenities')
+                    ->get();
                 return new PropertyCollection($properties);
             }
         }
@@ -97,16 +99,22 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePropertyRequest $request, Property $property)
     {
-        //
+        $property->update($request->all());
+        return new PropertyResource($property);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DeletePropertyRequest $request, Property $property)
     {
-        //
+        $propertyId = $property->property_id;
+        $property->delete();
+        return response()->json([
+            'message' => 'Property deleted successfully',
+            'property_id' => $propertyId,
+        ], 200);
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('client_id')->references('client_id')->on('clients')->onDelete('cascade');
             $table->dateTime('check_in_date');
             $table->dateTime('check_out_date');
-            $table->string('reservation_status');
+            $table->string('reservation_status')->default("Pending");
             $table->decimal('reservation_amount');
             $table->timestamps();
         });

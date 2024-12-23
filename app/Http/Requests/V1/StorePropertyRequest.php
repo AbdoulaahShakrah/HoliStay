@@ -36,8 +36,7 @@ class StorePropertyRequest extends FormRequest
             'property_price' => ['required', 'numeric', 'min:0'],
             'property_status' => ['required', 'string', Rule::in(['Available', 'Occupied'])],
             'property_capacity' => ['required', 'integer', 'min:1'],
-            'property_description' => ['required', 'string'],
-            'page_visits' => ['nullable', 'integer', 'min:0'],
+            'property_description' => ['required', 'string']
         ];
     }
 
@@ -58,7 +57,6 @@ class StorePropertyRequest extends FormRequest
             'property_status' => $this->propertyStatus,
             'property_capacity' => $this->propertyCapacity,
             'property_description' => $this->propertyDescription,
-            'page_visits' => $this->pageVisits,
         ]);
     }
 }

@@ -21,6 +21,7 @@ class PhotoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    //Try to do bulk store for many photos
     public function store(StorePhotoRequest $request)
     {
         $photo = Photo::create($request->all());

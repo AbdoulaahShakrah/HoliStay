@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\V1;
+namespace App\Http\Requests\v1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePhotoRequest extends FormRequest
+class DeletePropertyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,7 @@ class StorePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'property_id' => ['required', 'integer'],
-            'photo_url' => ['required', 'url']
-        ];  
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'property_id' => $this->propertyId,
-            'photo_url' => $this->propertyUrl
-        ]);
+            //
+        ];
     }
 }

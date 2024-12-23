@@ -27,7 +27,6 @@ class ReservationRequest extends FormRequest
             'client_id' => ['required', 'integer'],
             'check_in_date' => ['required', 'date'],
             'check_out_date' => ['required', 'date'],
-            'reservation_status' => ['required', 'string', Rule::in(["Confirmed", "Pending", "Cancelled"])],
             'reservation_amount' => ['required', 'numeric', 'min:0'],
         ];
     }
@@ -39,7 +38,6 @@ class ReservationRequest extends FormRequest
             'client_id' => $this->clientId,
             'check_in_date' => $this->checkInDate,
             'check_out_date' => $this->checkOutDate,
-            'reservation_status' => $this->reservationStatus,
             'reservation_amount' => $this->reservationAmount,
         ]);
     }

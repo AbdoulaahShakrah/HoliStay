@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Client;
 use App\Models\Host;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +23,7 @@ class HostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => Client::all()->random()->user_id, // Substitui User::factory()
+            'user_id' => User::factory(),
             'host_description' => $this->faker->paragraph(),
             'job' => $this->faker->jobTitle(),
             'iban' => $this->faker->iban(),

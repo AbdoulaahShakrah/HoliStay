@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = "properties";
     protected $primaryKey = "property_id";
@@ -26,8 +27,7 @@ class Property extends Model
                             "property_price",
                             "property_status", 
                             "property_capacity", 
-                            "property_description", 
-                            "page_visits"];
+                            "property_description"];
     public function host(): BelongsTo
     {
         return $this->belongsTo(Host::class, 'host_id', 'host_id');
