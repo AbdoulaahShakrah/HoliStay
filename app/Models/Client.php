@@ -15,7 +15,8 @@ class Client extends Model
     protected $primaryKey = "client_id";
     public $timestamps = false;
 
-    
+    protected $fillable = ["user_id", "client_name", "phone_number", "languages"];
+
     public function reservations(): HasMany {
         return $this->hasMany(Reservation::class, 'client_id', 'client_id');
     }

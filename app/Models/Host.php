@@ -14,7 +14,8 @@ class Host extends Model
     protected $table = "hosts";
     protected $primaryKey = "host_id";
 
-    
+    protected $fillable = ["user_id", "host_description", "job", "iban", "nif"];
+
     public function client(): BelongsTo{
         return $this->belongsTo(Client::class, 'client_id', 'client_id');
     }

@@ -11,8 +11,8 @@ class StorePropertyTaxRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
-    }
+        $user = $this->user();
+        return $user != null && $user->tokenCan('total');    }
 
     /**
      * Get the validation rules that apply to the request.

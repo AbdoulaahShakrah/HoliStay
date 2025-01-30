@@ -29,7 +29,7 @@ class PersonalAccessToken extends Model implements HasAbilities
         'abilities',
         'expires_at',
     ];
-
+    protected $connection = "mysql_users";
     /**
      * The attributes that should be hidden for serialization.
      *

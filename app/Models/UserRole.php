@@ -10,6 +10,7 @@ class UserRole extends Model
     protected $table = "user_roles";
     protected $primaryKey = "client_id";
     protected $connection = 'mysql_users';
+    protected $fillable = [ "user_id", "role"];
     use HasFactory;
 
 

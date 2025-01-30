@@ -3,17 +3,17 @@
 namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-class PaymentRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $user = $this->user();
-        return $user != null && ($user->tokenCan('restricted') || $user->tokenCan('total'));
+        return true;
     }
 
     /**
@@ -24,16 +24,18 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'reservation_id' => ['required', 'integer'],
-            'payment_method' => ['required', 'string', Rule::in(["Paypall", "Credit Card"])],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
         ];
     }
+
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'reservation_id' => $this->reservationId,
-            'payment_method' => $this->paymentMethod,
+            'email' => strtolower($this->email),
+            'password' => Hash::make($this->password),
         ]);
     }
 }

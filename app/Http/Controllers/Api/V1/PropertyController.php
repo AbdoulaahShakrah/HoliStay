@@ -12,6 +12,7 @@ use App\Models\Property;
 use App\Models\Reservation;
 use App\Services\V1\PropertyFilter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
@@ -91,16 +92,22 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Property $property)
+    public function show($id)
     {
-        return new PropertyResource($property->loadMissing('photos', 'property_taxes', 'property_amenities'));
+        $property = Property::with('photos', 'property_amenities', 'property_taxes')->find($id);
+        if (!$property) {
+            return response()->json(['message' => 'Property not found'], 404);
+        }
+    
+        return new PropertyResource($property);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePropertyRequest $request, Property $property)
+    public function update(UpdatePropertyRequest $request, $id)
     {
+        $property = Property::findOrFail($id);
         $property->update($request->all());
         return new PropertyResource($property);
     }
