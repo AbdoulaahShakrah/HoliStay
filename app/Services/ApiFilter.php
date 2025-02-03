@@ -14,7 +14,7 @@ class ApiFilter {
     public function transform(Request $request) {
         $eloQuery = [];
         foreach ($this->safeParms as $parm => $operators) {
-            $query = $request->query($parm); // read the param value using param as key
+            $query = $request->query($parm);
 
             if (!isset($query)) {
                 continue;

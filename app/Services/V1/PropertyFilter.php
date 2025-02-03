@@ -9,11 +9,12 @@ class PropertyFilter extends ApiFilter{
         'propertyType' => ['eq'],
         'propertyCountry' => ['contain'],
         'propertyCity' => ['contain'],
-        'propertyPrice' => ['gt', 'lt'],
+        'propertyPrice' => ['gt', 'lt', 'gte', 'lte'],
         'propertyCapacity' => ['gt', 'lt'],
         'propertyStatus' => ['eq'],
         'checkInDate' => ['eq'],
         'checkOutDate' => ['eq'],
+        'pageVisits' => ['gte'],
     ];
 
     protected $operatorMap = [
@@ -35,5 +36,6 @@ class PropertyFilter extends ApiFilter{
         'propertyStatus' => 'property_status',
         'checkInDate' => 'check_in_date',
         'checkOutDate' => 'check_out_date',
+        'pageVisits' => 'page_visits'
     ];
 }

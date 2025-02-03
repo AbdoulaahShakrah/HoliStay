@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         //AINDA NÃO FUNCIONA BEM, TEM PROBLEMA AO VERIFICAR A PASS
-        if (Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $user = User::where('email', $credentials['email'])->first();
             $role = UserRole::where('user_id', $user->id)
@@ -29,16 +29,32 @@ class AuthController extends Controller
                 ->first();
 
             $permissions = $role->role === 'host' ? 'total' : 'restricted';
+            $client_id = Client::where('user_id', $user->id)->pluck('client_id')->first();
 
             $token = $user->createToken($role->role, [$permissions])->plainTextToken;
 
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
+                'client_id' => $client_id,
                 'role' => $role->role,
             ]);
         }
         return response()->json(['error' => 'Credenciais inválidas', 'credentials' => Hash::check('pavlovic', $credentials['password'])], 401);
+    }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        
+        if ($user) {
+            $user->tokens->each(function ($token) {
+                $token->delete();
+            });
+            return response()->json(['message' => 'Logout efetuado com sucesso'], 200);
+        }
+
+        return response()->json(['error' => 'Nenhum utilizador autenticado'], 401);
     }
 
     public function clientRegister(StoreUserRequest $userRequest, StoreClientRequest $clientRequest)
