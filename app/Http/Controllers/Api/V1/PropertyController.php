@@ -131,4 +131,22 @@ class PropertyController extends Controller
             'property_id' => $propertyId,
         ], 200);
     }
+
+    /**
+     * Display the properties from a host.
+     */
+    //http://127.0.0.1:8000/api/v1/properties-by-host?host_id=2
+    public function propertiesByHostId(Request $request)
+    {
+        $hostId = $request->query('host_id');
+        $properties = Property::where('host_id', $hostId)->with('photos')->get();
+
+        if ($properties->isEmpty()) {
+            return response()->json([
+                'message' => 'No properties found for this host.'
+            ], 404);
+        }
+
+        return new PropertyCollection($properties);
+    }
 }

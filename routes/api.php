@@ -56,5 +56,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
     Route::get('reservations/by-property', [ReservationController::class, 'getByPropertyId']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('properties-by-host', [PropertyController::class, 'propertiesByHostId']);
 });
 
