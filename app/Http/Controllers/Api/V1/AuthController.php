@@ -20,7 +20,7 @@ class AuthController extends Controller
     {
 
         $credentials = $request->only('email', 'password');
-        //AINDA NÃO FUNCIONA BEM, TEM PROBLEMA AO VERIFICAR A PASS
+
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $user = User::where('email', $credentials['email'])->first();
@@ -30,12 +30,15 @@ class AuthController extends Controller
 
             $permissions = $role->role === 'host' ? 'total' : 'restricted';
             $client_id = Client::where('user_id', $user->id)->pluck('client_id')->first();
+            $host_id = Host::where('user_id', $client_id)->pluck('host_id')->first() ?? null;
+
             $token = $user->createToken($role->role, [$permissions])->plainTextToken;
 
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 'client_id' => $client_id,
+                'host_id' => $host_id,
                 'role' => $role->role,
             ]);
         }
