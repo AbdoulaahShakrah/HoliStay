@@ -30,7 +30,6 @@ class AuthController extends Controller
 
             $permissions = $role->role === 'host' ? 'total' : 'restricted';
             $client_id = Client::where('user_id', $user->id)->pluck('client_id')->first();
-
             $token = $user->createToken($role->role, [$permissions])->plainTextToken;
 
             return response()->json([

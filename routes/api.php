@@ -24,6 +24,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
     Route::post('client-register', [AuthController::class, 'clientRegister']);
 
     Route::post('host-register', [AuthController::class, 'hostRegister']);
+
 });
 
 //api/v1/properties 

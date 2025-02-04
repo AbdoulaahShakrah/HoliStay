@@ -83,7 +83,8 @@ class PropertyController extends Controller
         });
     }
 
-    public function categories(){
+    public function categories()
+    {
         $categories = Property::distinct()->orderBy('property_type')->pluck('property_type');
         return response()->json($categories);
     }
@@ -131,4 +132,7 @@ class PropertyController extends Controller
             'property_id' => $propertyId,
         ], 200);
     }
+
+
+    
 }

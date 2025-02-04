@@ -33,8 +33,7 @@ class ReservationController extends Controller
                 'message' => 'No reservations found for this client.'
             ], 404);
         }
-
-
+        
         return new ReservationCollection($reservations);
     }
 
