@@ -17,7 +17,7 @@ class Host extends Model
     protected $fillable = ["user_id", "host_description", "job", "iban", "nif"];
 
     public function client(): BelongsTo{
-        return $this->belongsTo(Client::class, 'client_id', 'client_id');
+        return $this->belongsTo(Client::class, 'user_id', 'client_id');
     }
 
     public function properties(): HasMany{

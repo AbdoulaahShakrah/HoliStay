@@ -13,7 +13,7 @@ class UpdatePropertyRequest extends FormRequest
     public function authorize(): bool
     {
         $user = $this->user();
-        return $user != null && $user->tokenCan('total');
+        return $user != null && ($user->tokenCan('restricted') || $user->tokenCan('total'));
     }
 
     /**
@@ -49,6 +49,7 @@ class UpdatePropertyRequest extends FormRequest
                 'property_type' => ['sometimes', 'required', 'string', 'max:255'],
                 'property_bedrooms' => ['sometimes', 'nullable', 'integer', 'min:0'],
                 'property_bathrooms' => ['sometimes', 'nullable', 'integer', 'min:0'],
+                'page_visits' => ['sometimes', 'required', 'integer', 'min:0'],
                 'property_beds' => ['sometimes', 'nullable', 'integer', 'min:0'],
                 'cancellation_policy' => ['sometimes', 'required', 'integer', 'min:0'],
                 'property_price' => ['sometimes', 'required', 'numeric', 'min:0'],
@@ -102,6 +103,9 @@ class UpdatePropertyRequest extends FormRequest
         }
         if ($this->has('propertyDescription')) {
             $data['property_description'] = $this->propertyDescription;
+        }
+        if($this->has('pageVisits')){
+            $data['page_visits'] = $this->pageVisits;
         }
         
         $this->merge($data);
