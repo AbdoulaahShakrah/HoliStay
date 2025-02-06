@@ -21,7 +21,7 @@ class ReservationResource extends JsonResource
             'check_out_date' => $this->check_out_date,
             'reservation_status' => $this->reservation_status,
             'reservation_amount' => $this->reservation_amount,
-            'property' => new PropertyResource($this->whenLoaded('property')),
+            'property' => new PropertyResource($this->property),
            
         ];
     }

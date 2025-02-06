@@ -27,7 +27,9 @@ class Property extends Model
                             "property_price",
                             "property_status", 
                             "property_capacity", 
-                            "property_description"];
+                            "property_description",
+                            'page_visits'
+                        ];
     public function host(): BelongsTo
     {
         return $this->belongsTo(Host::class, 'host_id', 'host_id');

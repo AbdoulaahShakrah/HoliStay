@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Http\Resources\v1\HostResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,6 +18,7 @@ class PropertyResource extends JsonResource
         return [
             'property_id' => $this->property_id,
             'host_id' => $this->host_id,
+            'host' => new HostResource($this->host),
             'property_name' => $this->property_name,
             'property_country' => $this->property_country,
             'property_city' => $this->property_city,
@@ -28,11 +30,11 @@ class PropertyResource extends JsonResource
             'cancellation_policy' => $this->cancellation_policy,
             'property_price' => $this->property_price,
             'property_status' => $this->property_status,
-            
+
             'property_capacity' => $this->property_capacity,
             'property_description' => $this->property_description,
             'page_visits' => $this->page_visits,
-            'photos' => new PhotoCollection($this->whenLoaded('photos')),
+            'photos' => new PhotoCollection($this->photos),
             'amenities' => new PropertyAmenitiesCollection($this->whenLoaded('property_amenities')),
             'taxes' => new PropertyTaxesCollection($this->whenLoaded('property_taxes')),
         ];

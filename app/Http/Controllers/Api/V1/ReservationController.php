@@ -41,7 +41,7 @@ class ReservationController extends Controller
     {
 
         $clientId = $request->query('property_id');
-        $reservations = Reservation::where('property_id', $clientId)->with(['property.photos', 'property.property_amenities'])->get();
+        $reservations = Reservation::where('property_id', $clientId)->with(['property.photos', 'property.property_amenities', 'client'])->get();
 
         if ($reservations->isEmpty()) {
             return response()->json([

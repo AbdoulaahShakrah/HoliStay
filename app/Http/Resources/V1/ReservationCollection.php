@@ -19,6 +19,7 @@ class ReservationCollection extends ResourceCollection
             return [
                 'reservation_id' => $reservation->reservation_id,
                 'client_id' => $reservation->client_id,
+                'client' => new ClientResource($reservation->whenLoaded('client')),
                 'check_in_date' => $reservation->check_in_date,
                 'check_out_date' => $reservation->check_out_date,
                 'reservation_status' => $reservation->reservation_status,
