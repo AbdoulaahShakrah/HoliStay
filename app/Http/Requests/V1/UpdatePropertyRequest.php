@@ -40,6 +40,11 @@ class UpdatePropertyRequest extends FormRequest
                 'property_capacity' => ['required', 'integer', 'min:1'],
                 'property_description' => ['required', 'string'],
                 
+                'amenities' => ['required', 'array'],
+                'amenities.*' => ['integer', 'exists:amenities,amenity_id'],
+                //'photos' => ['required', 'array'],
+                //'photos.*' => ['string'],
+                
             ];
         } else {
             return [

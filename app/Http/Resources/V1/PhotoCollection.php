@@ -15,7 +15,8 @@ class PhotoCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return $this->collection->map(function ($photos) {
-            return [    
+            return [ 
+                'photo_id' => $photos->photo_id,
                 'photo_url' => $photos->photo_url
             ];
     })->toArray();
