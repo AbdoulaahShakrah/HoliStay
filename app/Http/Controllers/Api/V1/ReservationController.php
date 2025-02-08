@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\ReservationRequest;
+use App\Http\Requests\v1\UpdateReservationRequest;
 use App\Http\Resources\v1\ReservationCollection;
 use App\Http\Resources\V1\ReservationResource;
 use App\Models\Reservation;
@@ -64,8 +65,10 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateReservationRequest $request, $id)
     {
-        //
+        $property = Reservation::findOrFail($id);
+        $property->update($request->all());
+        return new ReservationResource($property);
     }
 }

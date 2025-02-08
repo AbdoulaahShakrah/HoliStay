@@ -39,6 +39,7 @@ class UpdatePropertyRequest extends FormRequest
                 'property_status' => ['required', 'string', Rule::in(['Available', 'Occupied'])],
                 'property_capacity' => ['required', 'integer', 'min:1'],
                 'property_description' => ['required', 'string'],
+                
             ];
         } else {
             return [

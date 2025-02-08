@@ -52,6 +52,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
 
     Route::post('reservation', [ReservationController::class, 'store']);
 
+    Route::patch('reservation/{id}', [ReservationController::class, 'update']);
+
     Route::get('reservations/by-client', [ReservationController::class, 'getByClientId']);
 
     Route::get('reservations/by-property', [ReservationController::class, 'getByPropertyId']);
