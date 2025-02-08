@@ -24,7 +24,7 @@ class StorePhotoRequest extends FormRequest
     {
         return [
             'property_id' => ['required', 'integer'],
-            'photo_url' => ['required', 'url']
+            'photo_url' => ['required', 'string']
         ];  
     }
 

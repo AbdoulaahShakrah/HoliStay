@@ -16,6 +16,7 @@ class AmenityCollection extends ResourceCollection
     {
         return $this->collection->map(function ($amenity) {
             return[
+                'amenity_id' => $amenity->amenity_id,
                 'name' => $amenity->name
             ];
         })->toArray();

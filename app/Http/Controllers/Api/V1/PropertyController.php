@@ -8,7 +8,9 @@ use App\Http\Requests\V1\StorePropertyRequest;
 use App\Http\Requests\v1\UpdatePropertyRequest;
 use App\Http\Resources\V1\PropertyCollection;
 use App\Http\Resources\V1\PropertyResource;
+use App\Models\Photo;
 use App\Models\Property;
+use App\Models\PropertyAmenity;
 use App\Models\Reservation;
 use App\Services\V1\PropertyFilter;
 use Illuminate\Http\Request;
@@ -116,20 +118,36 @@ class PropertyController extends Controller
     public function update(UpdatePropertyRequest $request, $id)
     {
         $property = Property::findOrFail($id);
-        $property->update($request->all());
+
+        // Atualizar os dados da propriedade
+        $property->update($request->except('amenities', 'photos'));
+
+        // Atualizar os amenities na tabela property_amenity
+        $amenities = $request->amenities; // Array de amenity_ids enviados no request
+
+        // Apagar os amenities antigos e adicionar os novos
+        PropertyAmenity::where('property_id', $property->property_id)->delete();
+
+        foreach ($amenities as $amenity_id) {
+            PropertyAmenity::create([
+                'property_id' => $property->property_id,
+                'amenity_id' => $amenity_id
+            ]);
+        }
+
         return new PropertyResource($property);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DeletePropertyRequest $request, Property $property)
+    public function destroy(DeletePropertyRequest $request, $id)
     {
-        $propertyId = $property->property_id;
+        $property = Property::findOrFail($id);
         $property->delete();
         return response()->json([
             'message' => 'Property deleted successfully',
-            'property_id' => $propertyId,
+            'property_id' => $id,
         ], 200);
     }
 
