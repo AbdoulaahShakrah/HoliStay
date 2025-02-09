@@ -14,7 +14,7 @@ class PropertyFilter extends ApiFilter{
         'propertyStatus' => ['eq'],
         'checkInDate' => ['eq'],
         'checkOutDate' => ['eq'],
-        'pageVisits' => ['gte'],
+        'pageVisits' => ['gt', 'lt', 'gte', 'lte'],
     ];
 
     protected $operatorMap = [
