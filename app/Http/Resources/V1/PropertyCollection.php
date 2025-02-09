@@ -18,6 +18,7 @@ class PropertyCollection extends ResourceCollection
             return [
                 'property_id' => $property->property_id,
                 'property_name' => $property->property_name,
+                'host' => new HostResource($property->whenLoaded('host')),
                 'property_country' => $property->property_country,
                 'property_city' => $property->property_city,
                 'property_type' => $property->property_type,

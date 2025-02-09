@@ -152,17 +152,13 @@ class PropertyController extends Controller
     }
 
     /**
-     * #################################### Functions for Host #######################################
-     */
-
-    /**
      * Display the properties from a host.
      */
     //http://127.0.0.1:8000/api/v1/properties-by-host?host_id=2
     public function propertiesByHostId(Request $request)
     {
         $hostId = $request->query('host_id');
-        $properties = Property::where('host_id', $hostId)->with('photos', 'reservations')->get();
+        $properties = Property::where('host_id', $hostId)->with('photos', 'reservations', 'host')->get();
 
         if ($properties->isEmpty()) {
             return response()->json([

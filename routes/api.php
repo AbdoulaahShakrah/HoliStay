@@ -61,5 +61,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('properties-by-host', [PropertyController::class, 'propertiesByHostId']);
+
+    Route::delete('photos/{id}', [PhotoController::class, 'destroy']);
 });
 
