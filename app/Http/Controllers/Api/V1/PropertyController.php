@@ -8,13 +8,11 @@ use App\Http\Requests\V1\StorePropertyRequest;
 use App\Http\Requests\v1\UpdatePropertyRequest;
 use App\Http\Resources\V1\PropertyCollection;
 use App\Http\Resources\V1\PropertyResource;
-use App\Models\Photo;
 use App\Models\Property;
 use App\Models\PropertyAmenity;
 use App\Models\Reservation;
 use App\Services\V1\PropertyFilter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
@@ -24,7 +22,7 @@ class PropertyController extends Controller
     public function index(Request $request)
     {
         $filter = new PropertyFilter();
-        $queryItems = $filter->transform($request); // Filtros do request
+        $queryItems = $filter->transform($request); 
 
         if (!$this->hasCheckInAndOutDates($queryItems)) {
             return response()->json(['error' => 'Datas de check-in e check-out são obrigatórias'], 400);
@@ -35,7 +33,7 @@ class PropertyController extends Controller
 
         $propertiesQuery = Property::whereNotIn('property_id', $reservedPropertyIds);
 
-        // Se houver mais filtros, aplicamos
+        // Caso houver mais filtros aplicamos
         $filteredQueryItems = $this->removeCheckInAndOutDates($queryItems);
         if (!empty($filteredQueryItems)) {
             $propertiesQuery->where($filteredQueryItems);
